@@ -1,0 +1,46 @@
+Absolutely — managing merge conflicts doesn't have to be a headache if you’ve got the right tools in your arsenal. Here’s a curated list of popular and powerful tools that can help you resolve conflicts visually, efficiently, and with less stress:
+
+---
+
+### 🧰 Merge Conflict Resolution Tools
+
+| Tool | Highlights | Ideal For |
+|------|------------|-----------|
+| **`git mergetool`** | Built-in Git command that launches your configured merge tool | CLI users who want flexibility |
+| **VS Code** | Inline conflict markers with visual diff and resolution options | Devs who prefer a modern IDE |
+| **Meld** | Side-by-side comparison with intuitive UI | Beginners and intermediate users |
+| **KDiff3** | 3-way merge view (Base, Local, Remote) with auto-merge suggestions | Complex merges and legacy codebases |
+| **Beyond Compare** | Commercial tool with powerful diff and merge capabilities | Teams needing advanced file comparison |
+| **P4Merge** | Free tool from Perforce with clean UI and 3-way merge support | Git users in enterprise environments |
+| **Tower Git Client** | GUI Git client with built-in conflict resolution | Mac/Windows users who want an all-in-one Git experience |
+| **GitKraken** | Visual Git client with drag-and-drop merge and conflict resolution | Teams using GitHub/GitLab/Bitbucket |
+
+---
+
+### ⚙️ How to Set Up a Merge Tool in Git
+
+Example: Set up **Meld** as your default tool
+```bash
+git config --global merge.tool meld
+git mergetool
+```
+
+You can also configure:
+```bash
+git config --global mergetool.prompt false
+git config --global merge.conflictstyle diff3
+```
+
+This gives you a clearer 3-way diff: `LOCAL`, `BASE`, and `REMOTE`.
+
+---
+
+### 🧠 Pro Tip for DevOps Workflows
+
+For infrastructure-as-code (Terraform, Helm, etc.), consider using:
+- **Structured diff tools** like `terraform plan` or `helm diff` before merging.
+- **CI pipelines** that simulate merges and flag conflicts early.
+
+---
+
+Want help choosing the best tool for your workflow — whether you're resolving YAML conflicts in Kubernetes manifests or JSON diffs in Terraform modules? I can tailor recommendations based on your stack.
