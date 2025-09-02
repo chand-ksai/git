@@ -1,0 +1,72 @@
+Absolutely — resolving merge conflicts is a rite of passage for anyone working with Git. Here's a clear, step-by-step guide to help you handle them confidently:
+
+---
+
+### 🔧 What Is a Merge Conflict?
+
+A merge conflict occurs when Git can't automatically reconcile differences between two branches. This usually happens when:
+- Both branches modify the same line in a file.
+- One branch deletes a file that the other modifies.
+- A file is renamed in one branch and edited in another.
+
+---
+
+### 🛠️ How to Resolve Merge Conflicts (Command Line Workflow)
+
+1. **Trigger the Conflict**
+   ```bash
+   git merge feature-branch
+   ```
+   Git will pause the merge and mark the conflicting files.
+
+2. **Check Conflict Status**
+   ```bash
+   git status
+   ```
+   You'll see a list of files with conflicts under “Unmerged paths.”
+
+3. **Open the Conflicted File**
+   Look for conflict markers:
+   ```text
+   <<<<<<< HEAD
+   Your changes (current branch)
+   =======
+   Incoming changes (feature branch)
+   >>>>>>> feature-branch
+   ```
+
+4. **Manually Resolve the Conflict**
+   - Decide which changes to keep.
+   - You can keep one side, combine both, or rewrite the section entirely.
+   - Delete the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`) after editing.
+
+5. **Mark as Resolved**
+   ```bash
+   git add <filename>
+   ```
+
+6. **Complete the Merge**
+   ```bash
+   git commit
+   ```
+   Git will create a merge commit with your resolved changes.
+
+---
+
+### 🧠 Pro Tips
+
+- **Use a Merge Tool**: Run `git mergetool` to launch a visual tool like `vimdiff`, `meld`, or `kdiff3` for easier resolution.
+- **Conflict Style**: You can configure Git to show a 3-way diff:
+   ```bash
+   git config merge.conflictstyle diff3
+   ```
+   This adds a `BASE` version to help you compare both sides with the original.
+
+- **Avoid Conflicts Proactively**:
+   - Pull and rebase frequently.
+   - Communicate with teammates about overlapping work.
+   - Keep PRs small and focused.
+
+---
+
+Want to see how this plays out in a real-world DevOps scenario — like resolving conflicts in a Terraform module or Kubernetes manifest? I can walk you through that too.
