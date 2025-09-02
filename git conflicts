@@ -1,0 +1,102 @@
+Here's a clear, step-by-step guide tailored to your workflow:
+
+---
+
+### 🧭 What Causes Merge Conflicts?
+- Two branches modify the **same line** in a file.
+- One branch **deletes** a file, the other **modifies** it.
+- A file is **renamed** in one branch and **edited** in another.
+
+---
+
+### 🛠️ How to Resolve Merge Conflicts (CLI Workflow)
+
+1. **Trigger the merge**:
+   ```bash
+   git merge feature-branch
+   ```
+   Git will pause and show conflict markers in affected files.
+
+2. **Check conflict status**:
+   ```bash
+   git status
+   ```
+   You'll see files marked as "unmerged".
+
+3. **Open the conflicted file**:
+   You'll see something like:
+   ```text
+   <<<<<<< HEAD
+   Your changes
+   =======
+   Incoming changes
+   >>>>>>> feature-branch
+   ```
+
+4. **Manually edit the file**:
+   Decide which changes to keep — or combine them — and **remove the conflict markers**.
+
+5. **Mark the file as resolved**:
+   ```bash
+   git add filename
+   ```
+
+6. **Complete the merge**:
+   ```bash
+   git commit
+   ```
+
+---
+
+### 🧰 Pro Tips for Your Stack
+
+- Use `git mergetool` if you prefer a visual interface.
+- For Terraform modules or YAML configs, be extra cautious — whitespace and indentation matter.
+- For binary files (e.g., `.jar`, `.png`), Git can't auto-resolve. You'll need to choose one version:
+   ```bash
+   git checkout --ours filename
+   git checkout --theirs filename
+   ```
+
+---
+
+### 🔐 Bonus: Conflict Prevention
+
+- **Pull often** to stay in sync.
+- **Rebase** instead of merge for cleaner history:
+   ```bash
+   git pull --rebase
+   ```
+- Use **feature flags** to isolate risky changes.
+
+---
+
+#####  What are the common mistakes during merges?  #####
+Merges in Git can feel deceptively simple — until they go sideways. Here are the most common mistakes developers (even seasoned ones) make during merges, especially in fast-moving teams or complex CI/CD pipelines:
+
+---
+
+### ⚠️ Common Git Merge Mistakes
+
+| Mistake | Why It Happens | How to Avoid It |
+|--------|----------------|-----------------|
+| **Merging without pulling latest changes** | You merge a branch that’s outdated, causing conflicts or overwriting newer work. | Always run `git pull` before merging. Use `git fetch` + `git rebase` for cleaner history. |
+| **Ignoring merge conflicts** | Developers skip conflict resolution or blindly accept one side (`--ours` or `--theirs`). | Manually inspect and resolve conflicts. Use `git status` and `git diff` to guide you. |
+| **Committing unresolved conflict markers** | Accidentally committing files with `<<<<<<<`, `=======`, `>>>>>>>` still in them. | Use linters or pre-commit hooks to catch this. Always review diffs before committing. |
+| **Merging large feature branches without review** | Big merges introduce bugs or regressions that are hard to trace. | Break into smaller PRs. Use code reviews and CI checks before merging. |
+| **Using `git merge` when `git rebase` is better** | Merge creates messy history with unnecessary merge commits. | Use `git rebase` for linear history, especially in feature branches. |
+| **Force-pushing after a bad merge** | Trying to fix history but accidentally overwriting good commits. | Use `git reflog` to recover. Communicate with your team before force-pushing. |
+| **Not testing after merge** | Merge completes, but the code breaks due to subtle incompatibilities. | Always run tests locally or trigger CI pipelines post-merge. |
+
+---
+
+### 🧠 Bonus Tips for DevOps Pros Like You
+
+- **Automate conflict detection**: Use tools like GitKraken or GitHub’s merge queue to preemptively flag conflicts.
+- **Protect main branches**: Enforce branch protection rules to prevent accidental merges or force pushes.
+- **Use semantic commits**: Helps trace changes during merges and rollbacks.
+
+---
+
+Want to dive into merge strategies like `--no-ff`, `squash`, or `octopus` merges for multi-branch workflows? I can walk you through those too.
+
